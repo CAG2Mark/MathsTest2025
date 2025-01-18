@@ -4,11 +4,7 @@
 
 The 2025 instalment of my yearly maths test. :P
 
-As usual, this was made as a joke, but regardless, the project serves as a useful framework for making client-side maths tests. The entire system has been revamped this year to allow greater flexibility in setting up questions, and be more user-friendly for the end-user.
-
 # Setting up
-Due to the greater flexibility of this new framework, it is a bit more complicated to set up than before.
-
 For each question you want to put in \ your maths test, you need to do the following:
 1. Add the question and specify the answer types in `questiondata.json`.
 2. Add the sidebar button for that question.
