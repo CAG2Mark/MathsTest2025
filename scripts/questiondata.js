@@ -288,7 +288,7 @@ function populateQuestionData(json) {
 }
 
 function fetchQuestions(callback) {
-    fetch("../data/questiondata.json?version=4")
+    fetch("../data/questiondata.json?version=5")
         .then(response => response.json())
         .then(json => {
             populateQuestionData(json);
