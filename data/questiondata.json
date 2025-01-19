@@ -213,9 +213,9 @@
                     "isInt": false,
                     "inputs": ["a", "b"],
                     "tests": [
-                        { "a": 0, "b": 0 },
-                        { "a": 0, "b": 3 },
-                        { "a": 0, "b": 49 },
+                        { "a": 1, "b": 0 },
+                        { "a": 2, "b": 3 },
+                        { "a": 1, "b": 49 },
                         { "a": 1, "b": 2 },
                         { "a": 1, "b": 6 },
                         { "a": 1, "b": 10 },
@@ -241,7 +241,7 @@
         { 
             "name": "cp3", 
             "depends": ["radiusconv", "vectorspace", "number"],
-            "twiceHash": "570875240ac3a806f6156fb4dc039f8d491b36e1081189c301248972763e29e6"
+            "twiceHash": "f2874ac2d3bcfe10ef684f72e5c26a1c98972812a2bc7ea1b40e30d5479d083e"
         }
     ]
 }
