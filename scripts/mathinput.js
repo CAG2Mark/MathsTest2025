@@ -1,4 +1,4 @@
-import { eval_expr, check_expr } from "../lib/wasm-math-evaluator/wasm_math_evaluator.js"
+import { eval_expr, check_expr } from "../lib/wasm-math-evaluator/wasm_math_evaluator1.js"
 
 let mathInputTemplate = document.getElementById("math-input-template");
 
@@ -32,6 +32,8 @@ function roundToSigfig(mantissaStr, dp) {
 
     if (dp == mantissaStr.length) return mantissaStr;
 
+    let increaseExp = false;
+
     let digits = [...mantissaStr].map(c => c - '0');
     // rounding to even is equivalent to adding 5 and truncating
     digits[dp] += 5;
@@ -41,6 +43,9 @@ function roundToSigfig(mantissaStr, dp) {
         
         if (i > 0) {
             digits[i - 1] += 1;
+        } else {
+            digits.unshift(1);
+            increaseExp = true;
         }
     }
 
@@ -49,11 +54,12 @@ function roundToSigfig(mantissaStr, dp) {
         ret += digits[i].toString();
     }
 
-    return ret;
+    return [ret, increaseExp];
 }
 
 function roundToInt(mantissaStr, exp) {
-    return roundToSigfig(mantissaStr, Math.max(0, Math.min(40, exp + 1)));
+    let [a, b] = roundToSigfig(mantissaStr, Math.max(0, Math.min(40, exp + 1)));
+    return a;
 }
 
 export function sanitize(text) {
@@ -98,21 +104,36 @@ export class MathInputBox {
 
         let mantissaStr = res.mantissa;
 
-        let allZeros = true;
-        for (let i = 0; i < mantissaStr.length; ++i) {
-            if (mantissaStr[i] == '0') continue;
-            allZeros = false;
-            break;
+        function allZeros(str) {
+            for (let i = 0; i < str.length; ++i) {
+                if (str[i] == '0') continue;
+                return false;
+            }
+            return true;
         }
 
-        if (allZeros) {
+        if (res.exp < -DEC_PLACES) {
             return ["0"];
         }
 
+        let exp = res.exp;
+
+        let roundedMantissa;
         if (this.ansField.isInt) {
-            return [res.sign, roundToInt(mantissaStr, res.exp), res.exp];
+            roundedMantissa = roundToInt(mantissaStr, res.exp);
+        } else {
+            let [rounded, increaseExp] = roundToSigfig(mantissaStr, DEC_PLACES);
+            if (increaseExp) {
+                exp += 1;
+            }
+            roundedMantissa = rounded;
         }
-        return [res.sign, roundToSigfig(mantissaStr, DEC_PLACES), res.exp];
+
+        if (allZeros(roundedMantissa)) {
+            return ["0"];
+        }
+        
+        return [res.sign, roundedMantissa, exp];
     }
 
     eval(auxVariables) {

@@ -1,6 +1,6 @@
 import { initData } from "./questiondata.js";
 import { initUI } from "./ui.js";
-import init from "../lib/wasm-math-evaluator/wasm_math_evaluator.js";
+import init from "../lib/wasm-math-evaluator/wasm_math_evaluator1.js";
 import { initTutorial } from "./tutorial.js";
 
 document.getElementById("loading-screen").classList.remove("hidden");

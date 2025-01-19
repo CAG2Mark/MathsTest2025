@@ -148,7 +148,6 @@
                     "name": "ans",
                     "type": "FUNCTION",
                     "inputs": ["r", "t", "a"],
-                    "isInt": true,
                     "tests": [
                         { "r": 0.1, "t": 0, "a": 0 },
                         { "r": 0.1, "t": 1, "a": 0 },
@@ -241,7 +240,7 @@
         { 
             "name": "cp3", 
             "depends": ["radiusconv", "vectorspace", "number"],
-            "twiceHash": "f2874ac2d3bcfe10ef684f72e5c26a1c98972812a2bc7ea1b40e30d5479d083e"
+            "twiceHash": "5a2c2b1e3d7427dd611bd7161bb1b6ddd1d3641971860c712fea5d3a7381c660"
         }
     ]
 }

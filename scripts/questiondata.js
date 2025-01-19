@@ -1,5 +1,5 @@
 import { AnswerType, formatError, sanitize } from "./mathinput.js";
-import { check_expr } from "../lib/wasm-math-evaluator/wasm_math_evaluator.js";
+import { check_expr } from "../lib/wasm-math-evaluator/wasm_math_evaluator1.js";
 
 let code = (function () {
     return {
@@ -288,7 +288,7 @@ function populateQuestionData(json) {
 }
 
 function fetchQuestions(callback) {
-    fetch("../data/questiondata.json?version=6")
+    fetch("../data/questiondata.json?version=7")
         .then(response => response.json())
         .then(json => {
             populateQuestionData(json);
